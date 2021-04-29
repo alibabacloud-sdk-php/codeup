@@ -26,18 +26,22 @@ use AlibabaCloud\Client\Resolver\ApiResolver;
  * @method DeleteRepositoryMember deleteRepositoryMember(array $options = [])
  * @method DeleteRepositoryProtectedBranch deleteRepositoryProtectedBranch(array $options = [])
  * @method DeleteRepositoryTag deleteRepositoryTag(array $options = [])
+ * @method DeleteRepositoryTagV2 deleteRepositoryTagV2(array $options = [])
  * @method DeleteRepositoryWebhook deleteRepositoryWebhook(array $options = [])
  * @method EnableRepositoryDeployKey enableRepositoryDeployKey(array $options = [])
  * @method GetBranchInfo getBranchInfo(array $options = [])
+ * @method GetCodeCompletion getCodeCompletion(array $options = [])
  * @method GetCodeupOrganization getCodeupOrganization(array $options = [])
  * @method GetFileBlobs getFileBlobs(array $options = [])
  * @method GetGroupDetail getGroupDetail(array $options = [])
  * @method GetMergeRequestApproveStatus getMergeRequestApproveStatus(array $options = [])
  * @method GetMergeRequestDetail getMergeRequestDetail(array $options = [])
  * @method GetMergeRequestSetting getMergeRequestSetting(array $options = [])
+ * @method GetOrganizationSecurityCenterStatus getOrganizationSecurityCenterStatus(array $options = [])
  * @method GetProjectMember getProjectMember(array $options = [])
  * @method GetRepositoryInfo getRepositoryInfo(array $options = [])
  * @method GetRepositoryTag getRepositoryTag(array $options = [])
+ * @method GetRepositoryTagV2 getRepositoryTagV2(array $options = [])
  * @method GetUserInfo getUserInfo(array $options = [])
  * @method ListGroupMember listGroupMember(array $options = [])
  * @method ListGroupRepositories listGroupRepositories(array $options = [])
@@ -45,10 +49,12 @@ use AlibabaCloud\Client\Resolver\ApiResolver;
  * @method ListMergeRequestComments listMergeRequestComments(array $options = [])
  * @method ListMergeRequests listMergeRequests(array $options = [])
  * @method ListOrganizations listOrganizations(array $options = [])
+ * @method ListOrganizationSecurityScores listOrganizationSecurityScores(array $options = [])
  * @method ListRepositories listRepositories(array $options = [])
  * @method ListRepositoryBranches listRepositoryBranches(array $options = [])
  * @method ListRepositoryCommits listRepositoryCommits(array $options = [])
  * @method ListRepositoryMember listRepositoryMember(array $options = [])
+ * @method ListRepositoryMemberWithInherited listRepositoryMemberWithInherited(array $options = [])
  * @method ListRepositoryTags listRepositoryTags(array $options = [])
  * @method ListRepositoryTree listRepositoryTree(array $options = [])
  * @method ListRepositoryWebhook listRepositoryWebhook(array $options = [])
@@ -1309,6 +1315,61 @@ class DeleteRepositoryTag extends Roa
 
 /**
  * @method string getOrganizationId()
+ * @method string getTagName()
+ * @method string getAccessToken()
+ * @method string getProjectId()
+ * @method $this withProjectId($value)
+ */
+class DeleteRepositoryTagV2 extends Roa
+{
+    /** @var string */
+    public $pathPattern = '/api/v3/projects/[ProjectId]/repository/tag/delete';
+
+    /** @var string */
+    public $method = 'DELETE';
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function withOrganizationId($value)
+    {
+        $this->data['OrganizationId'] = $value;
+        $this->options['query']['OrganizationId'] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function withTagName($value)
+    {
+        $this->data['TagName'] = $value;
+        $this->options['query']['TagName'] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function withAccessToken($value)
+    {
+        $this->data['AccessToken'] = $value;
+        $this->options['query']['AccessToken'] = $value;
+
+        return $this;
+    }
+}
+
+/**
+ * @method string getOrganizationId()
  * @method string getWebhookId()
  * @method $this withWebhookId($value)
  * @method string getAccessToken()
@@ -1468,6 +1529,47 @@ class GetBranchInfo extends Roa
     {
         $this->data['BranchName'] = $value;
         $this->options['query']['BranchName'] = $value;
+
+        return $this;
+    }
+}
+
+/**
+ * @method string getIsEncrypted()
+ * @method string getFetchKeys()
+ * @method string getServiceName()
+ * @method $this withServiceName($value)
+ */
+class GetCodeCompletion extends Roa
+{
+    /** @var string */
+    public $pathPattern = '/api/v2/service/invoke/[ServiceName]';
+
+    /** @var string */
+    public $method = 'POST';
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function withIsEncrypted($value)
+    {
+        $this->data['IsEncrypted'] = $value;
+        $this->options['query']['IsEncrypted'] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function withFetchKeys($value)
+    {
+        $this->data['FetchKeys'] = $value;
+        $this->options['query']['FetchKeys'] = $value;
 
         return $this;
     }
@@ -1816,6 +1918,28 @@ class GetMergeRequestSetting extends Roa
 }
 
 /**
+ * @method string getAccessToken()
+ */
+class GetOrganizationSecurityCenterStatus extends Roa
+{
+    /** @var string */
+    public $pathPattern = '/api/v4/organization/security/status';
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function withAccessToken($value)
+    {
+        $this->data['AccessToken'] = $value;
+        $this->options['query']['AccessToken'] = $value;
+
+        return $this;
+    }
+}
+
+/**
  * @method string getOrganizationId()
  * @method string getSubUserId()
  * @method string getAccessToken()
@@ -1941,6 +2065,58 @@ class GetRepositoryTag extends Roa
     {
         $this->data['OrganizationId'] = $value;
         $this->options['query']['OrganizationId'] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function withAccessToken($value)
+    {
+        $this->data['AccessToken'] = $value;
+        $this->options['query']['AccessToken'] = $value;
+
+        return $this;
+    }
+}
+
+/**
+ * @method string getOrganizationId()
+ * @method string getTagName()
+ * @method string getAccessToken()
+ * @method string getProjectId()
+ * @method $this withProjectId($value)
+ */
+class GetRepositoryTagV2 extends Roa
+{
+    /** @var string */
+    public $pathPattern = '/api/v3/projects/[ProjectId]/repository/tag/info';
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function withOrganizationId($value)
+    {
+        $this->data['OrganizationId'] = $value;
+        $this->options['query']['OrganizationId'] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function withTagName($value)
+    {
+        $this->data['TagName'] = $value;
+        $this->options['query']['TagName'] = $value;
 
         return $this;
     }
@@ -2641,6 +2817,28 @@ class ListOrganizations extends Roa
 
 /**
  * @method string getAccessToken()
+ */
+class ListOrganizationSecurityScores extends Roa
+{
+    /** @var string */
+    public $pathPattern = '/api/v4/organization/security/scores';
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function withAccessToken($value)
+    {
+        $this->data['AccessToken'] = $value;
+        $this->options['query']['AccessToken'] = $value;
+
+        return $this;
+    }
+}
+
+/**
+ * @method string getAccessToken()
  * @method string getArchive()
  * @method string getSort()
  * @method string getOrganizationId()
@@ -3064,6 +3262,44 @@ class ListRepositoryMember extends Roa
     {
         $this->data['Page'] = $value;
         $this->options['query']['Page'] = $value;
+
+        return $this;
+    }
+}
+
+/**
+ * @method string getOrganizationId()
+ * @method string getAccessToken()
+ * @method string getProjectId()
+ * @method $this withProjectId($value)
+ */
+class ListRepositoryMemberWithInherited extends Roa
+{
+    /** @var string */
+    public $pathPattern = '/api/v4/projects/[ProjectId]/all_members';
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function withOrganizationId($value)
+    {
+        $this->data['OrganizationId'] = $value;
+        $this->options['query']['OrganizationId'] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function withAccessToken($value)
+    {
+        $this->data['AccessToken'] = $value;
+        $this->options['query']['AccessToken'] = $value;
 
         return $this;
     }
